@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nanatter</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#eef9ef;font-family:"Noto Sans JP",sans-serif}
+header{position:sticky;top:0;background:#8fd694;color:#184d1f;padding:14px;text-align:center;font:40px Pacifico,cursive;box-shadow:0 2px 6px #0002}
+#tl{max-width:680px;margin:auto}.post{display:flex;gap:12px;background:#fff;margin:10px;border-radius:16px;padding:14px;box-shadow:0 2px 8px #0001}
+.icon{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;background:#dff5e1}
+.meta{color:#666;font-size:13px}.name{font-weight:700}.txt{margin:8px 0;font-size:17px}
+.act button{border:none;background:none;cursor:pointer;font-size:15px;margin-right:18px}
+.act button:hover{transform:scale(1.08)}
+</style></head><body><header>Nanatter</header><div id="tl"></div><script>
+const texts=["メロいかメロくないかで聞かれると配信が面白いよねなな湖さんは","なな湖さんの読み上げ、好き　おっちゃんとか津詰とか解釈一致すぎる","なな湖なな湖チャンネル…教養もありつつ話が面白い…","隣に理想的なゲーム実況があろうとも結局琵琶ちゃぷのが一番好き","IRIS OUTさあ、前回ななミュで歌った時も良かったけどなんかさらに最高になってない？？？","なな湖さんのMugen大好き","なな湖さん、先輩と動画撮ってボイトレもして誕生日配信の準備もしておまけにジムまで行ったらしいぞ　爆えら","なな湖さんのぽこポケ、とてもまったりしてて良い","この世にいくらあっても嬉しいもの、なな湖さんの雑談"];
+const names=["みどり","ゆず","そら","はる","かな","あおい","こはる","ゆい","なつ","ひなた","あかり","れん"];
+const ids=["midori","sora","koharu","yuzu","haru","natsu","ren","aoi"];
+const icons=["🐱","🐶","🐰","🦊","🐼","🐧","🌸","🌱","🍋","☕"];
+let posts=texts.map((t,i)=>({t,n:names[Math.random()*names.length|0],id:ids[Math.random()*ids.length|0]+(10+Math.random()*90|0),ic:icons[Math.random()*icons.length|0],r:50+Math.random()*11|0,rt:400+Math.random()*101|0,l:3000+Math.random()*1001|0}));
+posts.sort(()=>Math.random()-.5);
+const tl=document.getElementById("tl");let idx=0;
+function add(){for(let c=0;c<20;c++){if(idx>=posts.length){posts.sort(()=>Math.random()-.5);idx=0;}let p=posts[idx++],d=document.createElement("div");d.className="post";d.innerHTML=`<div class=icon>${p.ic}</div><div style="flex:1"><div class=name>${p.n}</div><div class=meta>@${p.id}</div><div class=txt>${p.t}</div><div class=act><button>💬 <span>${p.r}</span></button><button class=rt>🔁 <span>${p.rt}</span></button><button class=lk>❤ <span>${p.l}</span></button></div></div>`;
+d.querySelector(".rt").onclick=e=>{let s=e.currentTarget.querySelector("span");s.textContent=+s.textContent+1};
+d.querySelector(".lk").onclick=e=>{let s=e.currentTarget.querySelector("span");s.textContent=+s.textContent+1};
+tl.appendChild(d);}}
+add();onscroll=()=>{if(innerHeight+scrollY>document.body.offsetHeight-300)add();}
+</script></body></html>
